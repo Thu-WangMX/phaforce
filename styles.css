@@ -176,6 +176,10 @@ h3 {
   content: none;
 }
 
+.author-list span.author-line-end::after {
+  content: none;
+}
+
 .author-list sup,
 .affiliations sup {
   font-size: 0.68em;
