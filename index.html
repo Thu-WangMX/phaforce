@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="PhaForce project page for phase-scheduled visual-force policy learning with slow planning and fast correction for contact-rich manipulation." />
+    <meta property="og:title" content="PhaForce" />
+    <meta property="og:description" content="Phase-scheduled visual-force policy learning for contact-rich robot manipulation." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/intro.png" />
+    <title>PhaForce | IROS 2026</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="PhaForce home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>PhaForce</span>
+      </a>
+      <nav aria-label="Page navigation">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#videos">Videos</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">IROS 2026 / Contact-Rich Manipulation</p>
+          <h1>PhaForce</h1>
+          <p class="subtitle">
+            Phase-Scheduled Visual-Force Policy Learning with Slow Planning and Fast Correction
+            for Contact-Rich Manipulation
+          </p>
+          <div class="author-list" aria-label="Authors">
+            <a href="https://github.com/Thu-WangMX" target="_blank" rel="noreferrer">Mingxin Wang</a>
+            <span>Zhirun Yue</span>
+            <span>Renhao Lu</span>
+            <span>Yizhe Li</span>
+            <span>Zihan Wang</span>
+            <span>Guoping Pan</span>
+            <span>Kangkang Dong</span>
+            <span>Jun Cheng</span>
+            <span>Yi Cheng</span>
+            <span>Houde Liu</span>
+          </div>
+          <p class="affiliation">
+            Tsinghua Shenzhen International Graduate School, Tsinghua University; Zerith Robotics;
+            Shenzhen Institutes of Advanced Technology.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://arxiv.org/abs/2603.08342" target="_blank" rel="noreferrer">arXiv</a>
+            <a class="button" href="PhaForce.pdf">PDF</a>
+            <a class="button" href="#videos">Videos</a>
+            <a class="button" href="#citation">BibTeX</a>
+          </div>
+        </div>
+        <figure class="hero-media">
+          <video controls autoplay muted loop playsinline preload="metadata" poster="assets/images/intro.png">
+            <source src="assets/videos/wiping-id.mp4" type="video/mp4" />
+          </video>
+          <figcaption>High-rate force correction during contact-rich whiteboard wiping.</figcaption>
+        </figure>
+      </section>
+
+      <section class="metrics" aria-label="Key results">
+        <div>
+          <strong>86%</strong>
+          <span>Average success rate</span>
+        </div>
+        <div>
+          <strong>+40 pp</strong>
+          <span>Improvement over baselines</span>
+        </div>
+        <div>
+          <strong>24 Hz</strong>
+          <span>Fast contact/phase correction</span>
+        </div>
+        <div>
+          <strong>5 Tasks</strong>
+          <span>Real robot contact-rich evaluation</span>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="section-heading">
+          <p class="eyebrow">Overview</p>
+          <h2>Force feedback is useful only when the policy knows how to schedule it.</h2>
+        </div>
+        <div class="two-column">
+          <p>
+            Contact-rich manipulation requires vision-dominant task semantics and rapid reactions
+            to force/torque transients. Generative visuomotor policies often update at low frequency
+            because of inference latency and action chunking, so short-horizon contact events can be
+            underused as closed-loop feedback.
+          </p>
+          <p>
+            PhaForce introduces an explicit contact/phase schedule that coordinates low-rate
+            chunk-level planning with high-rate residual correction. The schedule decides when force
+            should be trusted, how much it should influence planning, and where corrections should be
+            applied during execution.
+          </p>
+        </div>
+      </section>
+
+      <section class="wide-figure" aria-label="PhaForce overview figure">
+        <img src="assets/images/intro.png" alt="PhaForce overview for contact-rich manipulation" />
+      </section>
+
+      <section class="section" id="method">
+        <div class="section-heading">
+          <p class="eyebrow">Method</p>
+          <h2>Slow planning and fast correction share one contact-aware phase schedule.</h2>
+        </div>
+        <div class="method-grid">
+          <article>
+            <span class="step">01</span>
+            <h3>Contact-Aware Phase Predictor</h3>
+            <p>
+              CAP estimates contact probability and task phase belief, turning force history into an
+              interpretable schedule signal for downstream planning and correction.
+            </p>
+          </article>
+          <article>
+            <span class="step">02</span>
+            <h3>Slow Diffusion Planner</h3>
+            <p>
+              The planner performs dual-gated visual-force fusion with orthogonal residual injection,
+              preserving vision semantics while conditioning action chunks on useful force cues.
+            </p>
+          </article>
+          <article>
+            <span class="step">03</span>
+            <h3>Fast Residual Corrector</h3>
+            <p>
+              The control-rate corrector routes residual actions through phase-dependent corrective
+              subspaces for within-chunk micro-adjustments.
+            </p>
+          </article>
+        </div>
+        <div class="large-figure">
+          <img src="assets/images/method.png" alt="PhaForce architecture with CAP, Slow planner, and Fast corrector" />
+        </div>
+      </section>
+
+      <section class="section dark" id="results">
+        <div class="section-heading">
+          <p class="eyebrow">Experiments</p>
+          <h2>Consistent gains on real robot contact-rich tasks.</h2>
+        </div>
+        <div class="results-grid">
+          <figure>
+            <img src="assets/images/results.png" alt="Real robot task success rates" />
+            <figcaption>Success rate comparisons across insertion, wiping, and pulling tasks.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/force.png" alt="Force regulation analysis" />
+            <figcaption>Force regulation improves contact quality during physical interaction.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/failure.png" alt="Failure analysis for contact-rich manipulation" />
+            <figcaption>Phase-routed corrections reduce typical jamming and misalignment failures.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="videos">
+        <div class="section-heading">
+          <p class="eyebrow">Videos</p>
+          <h2>Qualitative demonstrations across contact modes.</h2>
+        </div>
+        <div class="demo-grid">
+          <figure>
+            <video controls muted loop playsinline preload="metadata" poster="assets/images/intro.png">
+              <source src="assets/videos/wiping-id.mp4" type="video/mp4" />
+            </video>
+            <figcaption>
+              <strong>Wiping / ID</strong>
+              Stable contact tracking on the training-style surface.
+            </figcaption>
+          </figure>
+          <figure>
+            <video controls muted loop playsinline preload="metadata" poster="assets/images/intro.png">
+              <source src="assets/videos/wiping-ood.mp4" type="video/mp4" />
+            </video>
+            <figcaption>
+              <strong>Wiping / OOD</strong>
+              Robust adaptation under shifted surface geometry.
+            </figcaption>
+          </figure>
+          <figure>
+            <video controls muted loop playsinline preload="metadata" poster="assets/images/cap.png">
+              <source src="assets/videos/plug-insertion.mp4" type="video/mp4" />
+            </video>
+            <figcaption>
+              <strong>Plug Insertion</strong>
+              Corrective response during constrained insertion.
+            </figcaption>
+          </figure>
+          <figure>
+            <video controls muted loop playsinline preload="metadata" poster="assets/images/cap.png">
+              <source src="assets/videos/usb-insertion.mp4" type="video/mp4" />
+            </video>
+            <figcaption>
+              <strong>USB Insertion</strong>
+              Search and alignment from contact feedback.
+            </figcaption>
+          </figure>
+          <figure>
+            <video controls muted loop playsinline preload="metadata" poster="assets/images/intro.png">
+              <source src="assets/videos/drawer-pulling.mp4" type="video/mp4" />
+            </video>
+            <figcaption>
+              <strong>Drawer Pulling</strong>
+              Force-aware transition through grasp, contact, and pull.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section paper-section" id="paper">
+        <div class="paper-card">
+          <img src="assets/images/cap.png" alt="Contact-aware phase predictor visualization" />
+          <div>
+            <p class="eyebrow">Paper</p>
+            <h2>PhaForce: Phase-Scheduled Visual-Force Policy Learning with Slow Planning and Fast Correction for Contact-Rich Manipulation</h2>
+            <p>
+              PhaForce is accepted to IROS 2026. The work studies phase-scheduled force conditioning
+              for contact-rich robot manipulation and reports strong real-robot gains in both in-distribution
+              and out-of-distribution settings.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="https://arxiv.org/abs/2603.08342" target="_blank" rel="noreferrer">Read on arXiv</a>
+              <a class="button" href="PhaForce.pdf">Download PDF</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section citation" id="citation">
+        <div class="section-heading">
+          <p class="eyebrow">Citation</p>
+          <h2>BibTeX</h2>
+        </div>
+        <pre><code>@misc{wang2026phaforce,
+  title={PhaForce: Phase-Scheduled Visual-Force Policy Learning with Slow Planning and Fast Correction for Contact-Rich Manipulation},
+  author={Wang, Mingxin and Yue, Zhirun and Lu, Renhao and Li, Yizhe and Wang, Zihan and Pan, Guoping and Dong, Kangkang and Cheng, Jun and Cheng, Yi and Liu, Houde},
+  year={2026},
+  eprint={2603.08342},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  doi={10.48550/arXiv.2603.08342}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer>
+      <span>PhaForce Project Page</span>
+      <a href="https://arxiv.org/abs/2603.08342" target="_blank" rel="noreferrer">arXiv:2603.08342</a>
+    </footer>
+  </body>
+</html>
