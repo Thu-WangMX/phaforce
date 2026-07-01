@@ -172,7 +172,7 @@ h3 {
   padding: 0;
 }
 
-.author-list .author-break::after {
+.author-list span.author-break::after {
   content: none;
 }
 
