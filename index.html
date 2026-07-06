@@ -99,7 +99,7 @@
         </div>
       </section>
 
-      <section class="wide-figure" aria-label="PhaForce overview figure">
+      <section class="wide-figure overview-figure" aria-label="PhaForce overview figure">
         <img src="assets/images/intro.png" alt="PhaForce overview for contact-rich manipulation" />
       </section>
 
@@ -143,6 +143,60 @@
         <div class="section-heading">
           <p class="eyebrow">Experiments</p>
           <h2>Consistent gains on real robot contact-rich tasks.</h2>
+        </div>
+        <div class="result-table-wrap" aria-label="Main success rate table">
+          <table class="result-table">
+            <caption>Success rate (SR, %) across real-robot tasks.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Method</th>
+                <th scope="col">Charger</th>
+                <th scope="col">USB</th>
+                <th scope="col">Drawer</th>
+                <th scope="col">Wipe-ID</th>
+                <th scope="col">Wipe-OOD</th>
+                <th scope="col">Avg</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">DP</th>
+                <td>20</td>
+                <td>15</td>
+                <td>60</td>
+                <td>95</td>
+                <td>0</td>
+                <td>38</td>
+              </tr>
+              <tr>
+                <th scope="row">DP (force-concat)</th>
+                <td>20</td>
+                <td>20</td>
+                <td>50</td>
+                <td>85</td>
+                <td>0</td>
+                <td>35</td>
+              </tr>
+              <tr>
+                <th scope="row">RDP</th>
+                <td>50</td>
+                <td>55</td>
+                <td>65</td>
+                <td>85</td>
+                <td>75</td>
+                <td>66</td>
+              </tr>
+              <tr class="highlight-row">
+                <th scope="row">PhaForce (ours)</th>
+                <td>80</td>
+                <td>85</td>
+                <td>85</td>
+                <td>95</td>
+                <td>85</td>
+                <td>86</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="results-grid">
           <figure>
